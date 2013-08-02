@@ -75,7 +75,7 @@ fi
 
 echo "  - deploying bam dashboard file..."
 echo
-cp support/dashboardbuilder-bpms.war $SERVER_CONF
+cp support/dashboardbuilder-bpms.war $SERVER_DIR
 
 # Add execute permissions to the standalone.sh script.
 echo "  - making sure standalone.sh for server is executable..."
