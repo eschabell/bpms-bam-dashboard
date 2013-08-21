@@ -38,5 +38,8 @@ Released versions
 
 See the tagged releases for the following versions of the product:
 
+- v1.1 is BPM Suite BAM Dashboard Beta standalone, running on JBoss EAP 6.1, with lab documentation and Postgresql options for
+	datasources.
+
 - v1.0 is BPM Suite BAM Dashboard Beta standalone, running on JBoss EAP 6.1.
 
