@@ -1,0 +1,9 @@
+# remember to replace the following settings for your environment
+#db_url=jdbc:postgresql://localhost:5432/postgres
+#db_username=postgres
+#db_password=postgrespwd
+
+batch
+/subsystem=datasources/jdbc-driver=Postgres:add(driver-name=Postgres,driver-module-name=org.postgresql)
+/subsystem=datasources/data-source=PostgresDS:add(jndi-name=java:jboss/datasource/PostgresDS,enabled=true,use-java-context=true,connection-url=jdbc:postgresql://localhost:5432/postgres,user-name=postgres,password=postgrespwd,driver-name=Postgres)
+run-batch

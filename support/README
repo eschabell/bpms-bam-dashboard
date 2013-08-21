@@ -1,2 +1,4 @@
 Directory to hold helper files if needed.
 
+windows/*  - move the init.bat and installPostgres.bat to the top level of the project to install on windows.
+

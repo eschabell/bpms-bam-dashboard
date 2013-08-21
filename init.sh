@@ -1,10 +1,11 @@
 #!/bin/sh 
 DEMO="JBoss BPM Suite BAM Dashboard Demo"
-AUTHORS="Eric D. Schabell"
-PROJECT="git@github.com:eschabell/brms-customer-evaluation-demo.git"
+AUTHORS="Eric D. Schabell, Christina Lin"
+PROJECT="https://github.com/eschabell/bpms-bam-dashboard.git"
 JBOSS_HOME=./target/jboss-eap-6.1
 SERVER_DIR=$JBOSS_HOME/standalone/deployments/
 SERVER_CONF=$JBOSS_HOME/standalone/configuration/
+SERVER_MODULE=$JBOSS_HOME/modules/
 SRC_DIR=./installs
 EAP=jboss-eap-6.1.0.zip
 
@@ -25,12 +26,16 @@ echo "##              ####   #      #     #  ###                      ##"
 echo "##                                                              ##"   
 echo "##                                                              ##"   
 echo "##  brought to you by,                                          ##"   
-echo "##             ${AUTHORS}                                 ##"
+echo "##             ${AUTHORS}                  ##"
 echo "##                                                              ##"   
-echo "##  ${PROJECT}  ##"
+echo "##  ${PROJECT}         ##"
 echo "##                                                              ##"   
 echo "##################################################################"
 echo
+
+echo "Setup for optional Postgresql installation, see BAM lab guide documentation."
+echo
+chmod u+x support/installPostgres.sh
 
 # make some checks first before proceeding.	
 if [[ -r $SRC_DIR/$EAP || -L $SRC_DIR/$EAP ]]; then
@@ -77,10 +82,17 @@ echo "  - deploying bam dashboard file..."
 echo
 cp support/dashboardbuilder-bpms.war $SERVER_DIR
 
+echo "  - install JDBC Drivers..."
+echo
+cp support/layers.conf $SERVER_MODULE
+cp -R support/jdbc  $SERVER_MODULE/system/layers/
+
+
 # Add execute permissions to the standalone.sh script.
 echo "  - making sure standalone.sh for server is executable..."
 echo
 chmod u+x $JBOSS_HOME/bin/standalone.sh
+
 
 echo "Be sure to create a 'root' user and 'erics' user as statedin README with add-user.sh"
 echo
@@ -138,6 +150,10 @@ What type of user do you wish to add?
 	yes/no? no"	
 echo
 echo
+
+echo "See BAM lab guide documentation for more details on demonstrating the BAM component functionality."
+echo
+
 echo "${DEMO} Setup Complete."
 echo
 
