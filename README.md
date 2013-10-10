@@ -20,11 +20,6 @@ See Quick Start Guide in project as ODT and PDF for details on installation. For
 - login to dashbuilder (http://localhost:8080/dashbuilder) with user 'erics' and password 'bpmsuite'.
 
 
-Supporting Articles
--------------------
-
-[JBoss BPM BAM Dashboard Preview in the OpenShift Cloud] (http://www.schabell.org/2013/06/jboss-bpm-bam-dashboard-in-openshift-cloud.html)
-
 Released versions
 -----------------
 
