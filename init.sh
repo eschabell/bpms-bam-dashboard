@@ -6,6 +6,7 @@ JBOSS_HOME=./target/jboss-eap-6.1
 SERVER_DIR=$JBOSS_HOME/standalone/deployments/
 SERVER_CONF=$JBOSS_HOME/standalone/configuration/
 SERVER_MODULE=$JBOSS_HOME/modules/
+SUPPORT_DIR=./support
 SRC_DIR=./installs
 EAP=jboss-eap-6.1.0.zip
 
@@ -35,7 +36,7 @@ echo
 
 echo "Setup for optional Postgresql installation, see BAM lab guide documentation."
 echo
-chmod u+x support/installPostgres.sh
+chmod u+x $SUPPORT_DIR/installPostgres.sh
 
 # make some checks first before proceeding.	
 if [[ -r $SRC_DIR/$EAP || -L $SRC_DIR/$EAP ]]; then
@@ -78,78 +79,31 @@ else
 		unzip -q -d target $SRC_DIR/$EAP
 fi
 
+echo "  - enabling demo accounts logins in application-users.properties file..."
+echo
+cp $SUPPORT_DIR/application-users.properties $SERVER_CONF
+
+echo "  - enabling demo accounts role setup in application-roles.properties file..."
+echo
+cp $SUPPORT_DIR/application-roles.properties $SERVER_CONF
+
+echo "  - enabling demo accounts role setup in mgmt-users.properties file..."
+echo
+cp $SUPPORT_DIR/mgmt-users.properties $SERVER_CONF
+
 echo "  - deploying bam dashboard file..."
 echo
-cp support/dashboardbuilder-bpms.war $SERVER_DIR
+cp $SUPPORT_DIR/dashboardbuilder-bpms.war $SERVER_DIR
 
 echo "  - install JDBC Drivers..."
 echo
-cp support/layers.conf $SERVER_MODULE
-cp -R support/jdbc  $SERVER_MODULE/system/layers/
-
+cp $SUPPORT_DIR/layers.conf $SERVER_MODULE
+cp -R $SUPPORT_DIR/jdbc  $SERVER_MODULE/system/layers/
 
 # Add execute permissions to the standalone.sh script.
 echo "  - making sure standalone.sh for server is executable..."
 echo
 chmod u+x $JBOSS_HOME/bin/standalone.sh
-
-
-echo "Be sure to create a 'root' user and 'erics' user as statedin README with add-user.sh"
-echo
-echo "Example user setup:"
-echo
-echo "$ ./add-user.sh 
-
-What type of user do you wish to add? 
- a) Management User (mgmt-users.properties) 
-  b) Application User (application-users.properties)
-	(a): 
-
-	Enter the details of the new user to add.
-	Realm (ManagementRealm) :     
-	Username : root
-	The username 'root' is easy to guess
-	Are you sure you want to add user 'root' yes/no? yes
-	Password : 
-	Re-enter Password : 
-	About to add user 'root' for realm 'ManagementRealm'
-	Is this correct yes/no? yes
-	Added user 'root' to file
-	'/Users/erics/demo-projects/bpms-bam-dashboard/target/jboss-eap-6.1/standalone/configuration/mgmt-users.properties'
-	Added user 'root' to file
-	'/Users/erics/demo-projects/bpms-bam-dashboard/target/jboss-eap-6.1/domain/configuration/mgmt-users.properties'
-	Is this new user going to be used for one AS process to connect to another AS process? 
-	e.g. for a slave host controller connecting to the master or for a Remoting connection for server to server EJB calls.
-	yes/no? no
-
-$ ./add-user.sh 
-
-What type of user do you wish to add? 
- a) Management User (mgmt-users.properties) 
-  b) Application User (application-users.properties)
-	(a): b
-
-	Enter the details of the new user to add.
-	Realm (ApplicationRealm) : 
-	Username : erics
-	Password : 
-	Re-enter Password : 
-	What roles do you want this user to belong to? (Please enter a comma separated list, or leave blank for none)[  ]: user,admin
-	About to add user 'erics' for realm 'ApplicationRealm'
-	Is this correct yes/no? yes
-	Added user 'erics' to file
-	'/Users/erics/demo-projects/bpms-bam-dashboard/target/jboss-eap-6.1/standalone/configuration/application-users.properties'
-	Added user 'erics' to file
-	'/Users/erics/demo-projects/bpms-bam-dashboard/target/jboss-eap-6.1/domain/configuration/application-users.properties'
-	Added user 'erics' with roles user,admin to file
-	'/Users/erics/demo-projects/bpms-bam-dashboard/target/jboss-eap-6.1/standalone/configuration/application-roles.properties'
-	Added user 'erics' with roles user,admin to file
-	'/Users/erics/demo-projects/bpms-bam-dashboard/target/jboss-eap-6.1/domain/configuration/application-roles.properties'
-	Is this new user going to be used for one AS process to connect to another AS process? 
-	e.g. for a slave host controller connecting to the master or for a Remoting connection for server to server EJB calls.
-	yes/no? no"	
-echo
-echo
 
 echo "See BAM lab guide documentation for more details on demonstrating the BAM component functionality."
 echo

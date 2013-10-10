@@ -15,17 +15,9 @@ See Quick Start Guide in project as ODT and PDF for details on installation. For
 
 - run 'init.sh' & read output
 
-- add users in JBoss EAP server (root & erics)
-
-- jboss-eap-6/bin/add-user.sh
-
-  - Management User (root), select password of your choice.
-
-  - Application User (erics), select password of your choice, assign groups 'user,admin'.
-
 - start JBoss EAP server
 
-- login to dashbuilder (http://localhost:8080/dashbuilder) with user 'erics' and password assigned.
+- login to dashbuilder (http://localhost:8080/dashbuilder) with user 'erics' and password 'bpmsuite'.
 
 
 Supporting Articles
@@ -37,6 +29,8 @@ Released versions
 -----------------
 
 See the tagged releases for the following versions of the product:
+
+- v1.2 is BPM Suite BAM Dashboard Beta standalone, fully automated user creation and documentation directory.
 
 - v1.1 is BPM Suite BAM Dashboard Beta standalone, running on JBoss EAP 6.1, with lab documentation and Postgresql options for
 	datasources.
