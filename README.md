@@ -1,3 +1,6 @@
+Update: June 2018 moved to [Gitlab](https://gitlab.com/eschabell/bpms-bam-dashboard)
+
+
 JBoss BPM Suite BAM Dashboard Builder Demo Quickstart Guide
 ============================================================
 
